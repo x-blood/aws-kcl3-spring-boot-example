@@ -1,0 +1,24 @@
+@startuml
+
+title KCL メインコンシューマーアプリケーション の処理
+
+participant SampleConsumer as sc
+autonumber
+
+activate sc
+sc -> sc : public static void main メソッド起動
+note right
+以下の処理が実行される
+1. Kinesisのストリーム名の指定
+2. AWSリージョンの指定
+end note
+sc -> sc : SampleConsumer(streamName, region).run() メソッドの実行
+note right
+KinesisClientUtil経由で以下の処理が実行される
+1. DynamoDB クライアントの設定
+2. CloudWatch クライアントの設定
+3. KCL用のコンフィグ クラスの生成
+4. KCL用のスケジューラー クラスの生成
+5. スケジューラーの起動
+end note
+@enduml
